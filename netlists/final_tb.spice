@@ -1,0 +1,33 @@
+** sch_path: /home/eda/Documents/univ_x/final_tb.sch
+**.subckt final_tb
+Vdd VDD GND 1.8
+Vclk Clk GND pulse(0 1.8 0 100ps 100ps 5ns 10ns)
+Vrst Rst GND pwl(0 1.8 15n 1.8 15.1n 0)
+Vctrl[1] CTRL1 GND pwl(0 0 15n 0 15.1n 1.8 45n 1.8 45.1n 0)
+Vctrl[0] CTRL0 GND pwl(0 0 15n 0 15.1n 1.8 25n 1.8 25.1n 0 45n 0 45.1n 1.8 65n 1.8 65.1n 0)
+x1 GND VDD Clk CTRL0 CTRL1 VDD VDD GND GND VDD GND VDD VDD net1 net2 net3 net4 net5 net6 net7 net8 Rst univ_sr
+C1 net1 q0 0.01p m=1
+C2 net2 q1 0.01p m=1
+C3 net3 q2 0.01p m=1
+C4 net4 q3 0.01p m=1
+C5 net5 q4 0.01p m=1
+C6 net6 q5 0.01p m=1
+C7 net7 q6 0.01p m=1
+C8 net8 q7 0.01p m=1
+**** begin user architecture code
+
+.include /home/eda/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /home/eda/Documents/univ_x/univ_sr.spice
+.tran 0.1n 100n
+.save all
+
+
+** opencircuitdesign pdks install
+.lib /home/eda/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+**** end user architecture code
+**.ends
+.GLOBAL VDD
+.GLOBAL GND
+.end
